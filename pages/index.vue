@@ -4,6 +4,7 @@
     <div v-for="(msg, i) in msgs" :key="i">
       {{ msg }}
     </div>
+    <b-button>test</b-button>
   </div>
 </template>
 
