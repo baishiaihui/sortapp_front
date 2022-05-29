@@ -1,25 +1,38 @@
 <template>
   <div>
-    <button type="button" name="button" @click="getMsg">RailsからAPIを取得する</button>
-    <div v-for="(msg, i) in msgs" :key="i">
-      {{ msg }}
+    <h2>
+      川崎市　ゴミ分別情報
+    </h2>
+    <table v-if="sortinfos.length">
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>kana</th>
+          <th>sort</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="info in sortinfos" :key="info.id">
+          <td>{{ info.name }}</td>
+          <td>{{ info.kana }}</td>
+          <td>{{ info.sort }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div v-else>
+      情報が取得できませんでした
     </div>
-    <b-button>test</b-button>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      msgs: []
-    }
-  },
-  methods: {
-    getMsg () {
-      this.$axios.$get('/api/v1/hello')
-        .then(res => this.msgs.push(res))
-    }
+  async asyncData ({ $axios }) {
+    let sortinfos = []
+    await $axios.$get('/api/v1/sort_infos')
+      .then(res => (sortinfos = res))
+    return { sortinfos }
   }
 }
 </script>
