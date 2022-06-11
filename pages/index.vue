@@ -29,7 +29,9 @@
       <tbody>
         <tr v-for="info in sortinfos" :key="info.id">
           <td>{{ info.name }}</td>
-          <td>{{ info.sort }}</td>
+          <td v-if="info.sort2">{{ info.sort }}　または　{{info.sort2}}</td>
+          <td v-else>{{info.sort}}</td>
+          <td><b-button @click="show(info.id)" variant="success">詳細</b-button></td>
         </tr>
       </tbody>
     </table>
@@ -52,6 +54,10 @@ export default {
       if (this.keyword == "") {
         alert("検索キーワードを入力してください！");
       } else {
+
+        //検索ワードをSessionStorageに保持
+        sessionStorage.setItem('keyword',this.keyword)
+
         const url = "/api/v1/search";
         this.$axios
           .get(url, { params: { keyword: this.keyword } })
@@ -59,7 +65,9 @@ export default {
             this.sortinfos = res.data.sortinfos;
 
             if (this.sortinfos.length) {
-              //何もしない
+              //検索結果をSessionStorageに保持
+              sessionStorage.setItem('sortinfos',JSON.stringify(this.sortinfos))
+
             } else {
               this.message =
                 "入力されたキーワードを含む品目は見つかりませんでした。";
@@ -70,6 +78,21 @@ export default {
           });
       }
     },
+    show: function (id) {
+      this.$router.push(`/${id}`);
+    }
   },
+  mounted(){
+    if(sessionStorage.hasOwnProperty('keyword')){
+      this.keyword = sessionStorage.getItem('keyword')
+    }
+
+    if(sessionStorage.hasOwnProperty('sortinfos')){
+      this.sortinfos = JSON.parse(
+        sessionStorage.getItem('sortinfos')
+      )
+    }
+
+  }
 };
 </script>
