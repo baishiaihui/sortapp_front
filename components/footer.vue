@@ -1,6 +1,7 @@
 <template>
   <div class="footer">
-    このサイトは川崎市のオープンデータを元に作成しています。お問い合わせは kawasakirub@gmail.com まで
+    本サイトは川崎市のオープンデータを元に作成しています。お問い合わせは kawasakirub@gmail.com まで<br>
+    開発中のものであり、予告なく停止（メンテナンス）する可能性があります。
   </div>
 </template>
 

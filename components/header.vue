@@ -1,6 +1,6 @@
 <template>
 	<div class="header">
-		川崎市 ゴミ分別情報 検索
+		川崎市 ゴミ分別情報 検索（β版）
 	</div>
 </template>
 
