@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
-    <table>
+  <b-container class="align-items-center">
+    <h2>{{ sortinfo.name }}</h2>
+    <table class="tbl">
       <thread>
         <tr>
           <th></th>
@@ -10,28 +11,32 @@
 
       <tbody>
         <tr>
-          <td>品目名</td>
-          <td>{{ sortinfo.name }}</td>
+          <td class="topic">分別タイプ</td>
+          <td v-if="sortinfo.sort2">
+            <label>{{ sortinfo.sort }}</label> または <label>{{ sortinfo.sort2 }}</label>
+          </td>
+          <td v-else><label>{{ sortinfo.sort }}</label></td>
         </tr>
 
         <tr>
-          <td>分別タイプ</td>
-          <td v-if="sortinfo.sort2">{{ sortinfo.sort }}　または　{{ sortinfo.sort2 }}</td>
-          <td v-else>{{ sortinfo.sort }}</td>
+          <td class="topic">出し方のポイント</td>
+          <td v-if="sortinfo.detail ">{{ sortinfo.detail }}</td>
+          <td v-else>特になし</td>
         </tr>
 
         <tr>
-          <td>出し方のポイント</td>
-          <td>{{ sortinfo.detail }}</td>
-        </tr>
-
-        <tr>
-          <td>URL</td>
-          <td>{{ sortinfo.url }}</td>
+          <td class="topic">URL</td>
+          <td v-if="sortinfo.url">
+            <a :href="sortinfo.url">{{ sortinfo.url }}</a>
+          </td>
+          <td v-else>特になし</td>
         </tr>
       </tbody>
     </table>
-  </div>
+    <b-button variant="success" @click="$router.go(-1)" style="margin-top: 30px"
+      >戻る</b-button
+    >
+  </b-container>
 </template>
 
 <script>
@@ -56,3 +61,28 @@ export default {
   },
 };
 </script>
+
+<style>
+h2 {
+  padding: 0.5em;
+  color: #010101;
+  background: #eaf3ff;
+  border-bottom: solid 3px #516ab6;
+
+}
+
+label {
+  font-weight: bold;
+}
+
+.topic {
+  font-weight: bold;
+  font-size: 22px;
+  white-space: nowrap;
+}
+
+.tbl {
+  border-collapse: separate;
+  border-spacing: 15px;
+}
+</style>
