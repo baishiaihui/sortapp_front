@@ -15,5 +15,17 @@
 	background-color: #003300;
     text-align: center;
     width:100%;
+	border-bottom: solid 5px #FFFFDD;
 }
+
+  /* レスポンシブ対応 */
+  @media screen and (max-width:520px) {
+    /* ヘッダータイトルフォント調整 */
+	.header{
+		font-size: 20px;
+	}
+
+  }
+
+
 </style>

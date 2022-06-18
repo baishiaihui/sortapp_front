@@ -52,5 +52,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+
+  // ローディング画面用
+  loading: './components/loading.vue'
+  
 }
