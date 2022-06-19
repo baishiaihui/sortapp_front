@@ -13,35 +13,43 @@
             検索
           </button>
         </div>
-        <b-form-checkbox id="chk-1" v-model="syno_chk" name="syno_checkbox" cass="syno-chk">
-          類似語も含む
-        </b-form-checkbox>
+
+        <div class="syno-chk">
+          <b-form-checkbox id="chk-1" v-model="syno_chk" name="syno_checkbox">
+            類似語も含む
+          </b-form-checkbox>
+        </div>
       </div>
 
-      <table v-if="sortinfos.length" class="info-table">
-        <thead>
-          <tr>
-            <th>品目名</th>
-            <th>分別タイプ</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="info in sortinfos" :key="info.id">
-            <td>{{ info.name }}</td>
-            <td v-if="info.sort2">
-              <bold>{{ info.sort }}</bold> または <bold>{{ info.sort2 }}</bold>
-            </td>
-            <td v-else>
-              <label>{{ info.sort }}</label>
-            </td>
-            <td class="px-1">
-              <b-button @click="show(info.id)" variant="success">詳細</b-button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div>
+        <table v-if="sortinfos.length" class="info-table">
+          <thead>
+            <tr>
+              <th>品目名</th>
+              <th>分別タイプ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="info in sortinfos" :key="info.id">
+              <td>{{ info.name }}</td>
+              <td v-if="info.sort2">
+                <label class="bold">{{ info.sort }}</label> または
+                <label class="bold">{{ info.sort2 }}</label>
+              </td>
+              <td v-else>
+                <label class="bold">{{ info.sort }}</label>
+              </td>
+              <td class="px-1">
+                <b-button @click="show(info.id)" variant="success"
+                  >詳細</b-button
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-      <div v-else>{{ message }}</div>
+        <div v-else>{{ message }}</div>
+      </div>
     </b-container>
   </div>
 </template>
@@ -57,6 +65,7 @@ export default {
     };
   },
   methods: {
+    //キーワード検索の実行
     search() {
       if (this.keyword == "") {
         alert("検索キーワードを入力してください！");
@@ -119,14 +128,14 @@ export default {
 
 <style scoped>
 /* 検索フォーム */
-.search-form{
+.search-form {
   width: 50%;
   margin: 0 auto;
-
 }
 
-.syno {
-  margin: 10px;
+.syno-chk {
+  padding: 10px 0px 10px 5px;
+  color: blue;
 }
 
 /* 分別情報テーブル */
@@ -137,8 +146,8 @@ export default {
   width: 75%;
 }
 
-/* 太字用タグ */
-bold {
+/* 太字用 */
+.bold {
   font-weight: bold;
 }
 

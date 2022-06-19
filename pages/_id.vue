@@ -6,14 +6,17 @@
         <tr>
           <td class="detail-topic">分別タイプ</td>
           <td v-if="sortinfo.sort2">
-            <bold>{{ sortinfo.sort }}</bold> または <bold>{{ sortinfo.sort2 }}</bold>
+            <label class="bold">{{ sortinfo.sort }}</label> または
+            <label class="bold">{{ sortinfo.sort2 }}</label>
           </td>
-          <td v-else><bold>{{ sortinfo.sort }}</bold></td>
+          <td v-else>
+            <label class="bold">{{ sortinfo.sort }}</label>
+          </td>
         </tr>
 
         <tr>
           <td class="detail-topic">出し方のポイント</td>
-          <td v-if="sortinfo.detail ">{{ sortinfo.detail }}</td>
+          <td v-if="sortinfo.detail">{{ sortinfo.detail }}</td>
           <td v-else>特になし</td>
         </tr>
 
@@ -27,10 +30,14 @@
 
         <tr>
           <td>
-            <b-button variant="success" @click="$router.go(-1)" style="margin-top: 30px">戻る</b-button>
+            <b-button
+              variant="success"
+              @click="$router.go(-1)"
+              style="margin-top: 30px"
+              >戻る</b-button
+            >
           </td>
         </tr>
-
       </tbody>
     </table>
   </b-container>
@@ -47,11 +54,11 @@ export default {
     this.fetchContent();
   },
   methods: {
+    //詳細情報の取得
     fetchContent() {
       this.$axios
         .get(`/api/v1/sort_infos/${this.$route.params.id}`)
         .then((res) => {
-          console.log(res.data);
           this.sortinfo = res.data;
         });
     },
@@ -61,9 +68,9 @@ export default {
 
 <style scoped>
 /* 画面幅　*/
-.detail-container{
+.detail-container {
   width: 50%;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 /* タイトル */
@@ -79,6 +86,7 @@ export default {
   border-collapse: separate;
   border-spacing: 15px;
   border: 1px;
+  word-break:break-all;
 }
 
 .detail-topic {
@@ -87,22 +95,22 @@ export default {
   color: #010101;
 }
 
-/* 太字用タグ */
-bold {
+/* 太字用 */
+.bold {
   font-weight: bold;
 }
 
 /* レスポンシブ対応 */
 @media screen and (max-width: 960px) {
   /* 画面幅　*/
-  .detail-container{
+  .detail-container {
     width: 75%;
   }
 }
 
 @media screen and (max-width: 520px) {
   /* 画面幅　*/
-  .detail-container{
+  .detail-container {
     width: 100%;
   }
 }

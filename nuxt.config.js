@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'app',
+    title: '川崎市 ゴミ分別情報',
     htmlAttrs: {
       lang: 'en'
     },
@@ -15,7 +15,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/icon.png' }
     ]
   },
 
@@ -47,11 +47,19 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    //baseURL: '/'
+    // baseURLは環境変数 API_URLで上書き
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    ////応急処置
+    // babel: {
+    //   babelrc: false,
+    //   compact: false
+    // },
+    // extend(config) {
+    //   config.performance.maxAssetSize = 800000;
+    // }
   },
 
   // ローディング画面用
