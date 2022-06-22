@@ -41,7 +41,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/auth'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -60,6 +61,24 @@ export default {
     // extend(config) {
     //   config.performance.maxAssetSize = 800000;
     // }
+  },
+
+  auth: {
+    redirect: {
+      login: '/login',   // 未ログイン時に認証が必要なページにアクセスした際のリダイレクトURL
+      logout: '/',  // ログアウト時のリダイレクトURL
+      callback: '/callback',   // Oauth認証等で必要となる コールバックルート
+      home: '/admin',         // ログイン後のリダイレクトURL
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/v1/login', method: 'post', propertyName: 'jwt' },
+          user: false,
+          logout: false
+        }
+      },
+    }
   },
 
   // ローディング画面用
