@@ -25,7 +25,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    'plugins/axios'
+    'plugins/axios',
+    'plugins/vuelidate',
+    'plugins/vue-toastification'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -65,10 +67,10 @@ export default {
 
   auth: {
     redirect: {
-      login: '/login',   // 未ログイン時に認証が必要なページにアクセスした際のリダイレクトURL
+      login: '/admin/login',   // 未ログイン時に認証が必要なページにアクセスした際のリダイレクトURL
       logout: '/',  // ログアウト時のリダイレクトURL
       callback: '/callback',   // Oauth認証等で必要となる コールバックルート
-      home: '/admin',         // ログイン後のリダイレクトURL
+      home: '/admin/menu',         // ログイン後のリダイレクトURL
     },
     strategies: {
       local: {

@@ -55,8 +55,8 @@ export default {
   },
   methods: {
     //詳細情報の取得
-    fetchContent() {
-      this.$axios
+    fetchContent: async function () {
+      await this.$axios
         .get(`/api/v1/sort_infos/${this.$route.params.id}`)
         .then((res) => {
           this.sortinfo = res.data;
@@ -86,7 +86,7 @@ export default {
   border-collapse: separate;
   border-spacing: 15px;
   border: 1px;
-  word-break:break-all;
+  word-break: break-all;
 }
 
 .detail-topic {

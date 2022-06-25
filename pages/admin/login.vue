@@ -2,7 +2,12 @@
   <div class="login-form">
     <b-form @submit.prevent="login()">
       <label for="user">LoginID</label>
-      <b-form-input id="user" class="login-input" v-model="uid" type="text"></b-form-input>
+      <b-form-input
+        id="user"
+        class="login-input"
+        v-model="uid"
+        type="text"
+      ></b-form-input>
       <label for="password">Password</label>
       <b-form-input
         id="password"
@@ -10,7 +15,13 @@
         v-model="password"
         type="password"
       ></b-form-input>
-      <b-button variant="success" type="submit" @click="login()" class="login-button">ログイン</b-button>
+      <b-button
+        variant="success"
+        type="submit"
+        @click="login()"
+        class="login-button"
+        >ログイン</b-button
+      >
     </b-form>
   </div>
 </template>
@@ -24,11 +35,11 @@ export default {
     };
   },
   methods: {
-    login() {
+    login: async function () {
       //ローディング表示
       this.$nuxt.$loading.start();
 
-      this.$auth
+      await this.$auth
         .loginWith("local", {
           data: {
             uid: this.uid,
@@ -37,16 +48,20 @@ export default {
         })
         .then(
           (response) => {
-            console.log(response)
+            ////今後見直し
+            // this.$toast.success("ログインに成功しました。", {
+            //   position: "top-center",
+            // });
             //ローディング非表示
             this.$nuxt.$loading.finish();
           },
           (error) => {
-            alert("IDまたはパスワードが間違っています！");
+            this.$toast.error("IDまたはパスワードが間違っています。", {
+              position: "top-center",
+            });
 
             //ローディング非表示
             this.$nuxt.$loading.finish();
-            
           }
         );
     },
@@ -56,39 +71,34 @@ export default {
 
 <style scoped>
 /* ログインフォーム */
-.login-form{
+.login-form {
   margin: 0 auto;
   width: 30%;
 }
 
 /* ログイン入力欄 */
-.login-input{
+.login-input {
   margin-bottom: 10px;
 }
 
 /* ログインボタン */
-.login-button{
+.login-button {
   margin: 0 auto;
-  display:block;
+  display: block;
 }
 
 /* レスポンシブ対応 */
 @media screen and (max-width: 960px) {
   /* ログインフォーム */
-  .login-form{
+  .login-form {
     width: 50%;
   }
-
 }
 
 @media screen and (max-width: 520px) {
   /* ログインフォーム */
-  .login-form{
+  .login-form {
     width: 100%;
   }
-
-
 }
-
-
 </style>
